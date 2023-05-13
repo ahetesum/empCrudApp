@@ -1,12 +1,20 @@
 const express = require("express");
-const PORT = 8005;
+const bodyparser= require('body-parser');
+const PORT = 8001;
 const app = express();
-
-const router = require("./router");
+app.use(bodyparser.json());
+const connectDB= require('./config/db.config');
 
 
 app.listen(PORT, async () => {
   console.log(`server up on port ${PORT}`);
 });
 
-app.use(router);
+require("../src/route/dashboard.router")(app);
+require("../src/route/employee.router")(app);
+connectDB().then(()=>{
+  console.log('DB connected Sucessfully')
+}).catch((err)=>{
+  console.log('failed to connect DB '+ err)
+
+})
