@@ -8,7 +8,7 @@ module.exports = app => {
   router.post("/", employee.create);
   
 
-  // router.get("/employee/:id", employee.getBrandCategory);
+  router.get("/:id", employee.getById);
 
   app.use('/api/employee', router);
 };

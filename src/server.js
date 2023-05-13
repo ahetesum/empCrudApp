@@ -10,7 +10,7 @@ app.listen(PORT, async () => {
   console.log(`server up on port ${PORT}`);
 });
 
-require("../src/route/dashboard.router")(app);
+require("../src/route/auth.router")(app);
 require("../src/route/employee.router")(app);
 connectDB().then(()=>{
   console.log('DB connected Sucessfully')
