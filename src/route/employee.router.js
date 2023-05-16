@@ -1,14 +1,20 @@
+const middleware = require("../middleware/validate.token");
+
 module.exports = app => {
   const employee = require("../controllers/employee.controller");
 
   var router = require("express").Router();
 
-  router.get("/", employee.findAll);
+  router.get("/",[middleware.verifyToken], employee.findAll);
 
-  router.post("/", employee.create);
-  
+  router.post("/",[middleware.verifyToken], employee.create);
 
-  router.get("/:id", employee.getById);
+  router.get("/:id",[middleware.verifyToken], employee.getById);
 
-  app.use('/api/employee', router);
+  router.put("/:id",[middleware.verifyToken], employee.update);
+
+  router.delete("/:id",[middleware.verifyToken], employee.delete);
+
+
+  app.use('/api/v1/employee', router);
 };
